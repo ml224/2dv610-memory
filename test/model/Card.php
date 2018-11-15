@@ -10,10 +10,9 @@ class CardTest extends TestCase
     }
 
     public function test_sutInstanceOfCard(){
-        $sut = $this->getSut("");
+        $sut = $this->getSut("some id");
         $this->assertInstanceOf(Card::class, $sut);
     }
-
 
     public function test_GetId_shouldReturnCorrectStringId()
     {
