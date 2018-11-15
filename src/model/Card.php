@@ -8,5 +8,6 @@ class Card{
     }
 
     public function getId(){
+        return $this->id;
     }
 }
