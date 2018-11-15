@@ -15,13 +15,19 @@ class PileTest extends TestCase
     }
 
     public function test_construct_invalidArgument(){
-        $this->expectException(InvalidArgumentException::class);
-        $sut = $this->getSut(77);        
+        $invalidSizes = array_merge(range(-200, 3), range(7, 200));
+        foreach($invalidSizes as $size){
+            $this->expectException(InvalidArgumentException::class);
+            $sut = $this->getSut($size);
+        }
     }
 
     public function test_getRowSize_returnCorrectSize(){
-        $sut = $this->getSut(4);
-        $this->assertSame($sut->getRowSize(), 4);
+        $allowedSizes = array(4, 5, 6);
+        foreach($allowedSizes as $size){
+            $sut = $this->getSut($size);
+            $this->assertSame($sut->getRowSize(), $size);
+        }
     }
 }
 
