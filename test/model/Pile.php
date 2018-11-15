@@ -32,5 +32,7 @@ class PileTest extends TestCase
             $this->assertSame($sut->getRowSize(), $size);
         }
     }
+
 }
+
 
