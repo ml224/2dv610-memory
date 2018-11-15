@@ -4,13 +4,22 @@ require_once("../src/model/Card.php");
 
 class CardTest extends TestCase
 {
-    private $id = "123";
-    
+
+    public function getSut($id){
+        return new Card($id);
+    }
+
+    public function test_sutInstanceOfCard(){
+        $sut = $this->getSut("");
+        $this->assertInstanceOf(Card::class, $sut);
+    }
+
 
     public function test_GetId_shouldReturnCorrectStringId()
     {
-        $card = new Card($this->id);
-        $this->assertSame($card->getId(), $this->id);
+        $id = "some id";
+        $sut = $this->getSut($id);
+        $this->assertSame($sut->getId(), $id);
     }
 }
 
