@@ -13,5 +13,11 @@ class PileTest extends TestCase
         $sut = $this->getSut(4);
         $this->assertInstanceOf(Pile::class, $sut);
     }
+
+    public function test_invalidArgument(){
+        $sut = $this->getSut(77);
+        $this->expectException(InvalidArgumentException::class);
+
+    }
 }
 
