@@ -9,14 +9,19 @@ class PileTest extends TestCase
         return new Pile($amount);
     }
 
-    public function test_sutInstanceOfPile(){
+    public function test_construct_instanceOfPile(){
         $sut = $this->getSut(4);
         $this->assertInstanceOf(Pile::class, $sut);
     }
 
-    public function test_invalidArgument(){
+    public function test_construct_invalidArgument(){
         $this->expectException(InvalidArgumentException::class);
         $sut = $this->getSut(77);        
+    }
+
+    public function test_getRowSize_returnCorrectSize(){
+        $sut = $this->getSut(4);
+        $this->assertSame($sut->getRowSize(), 4);
     }
 }
 
