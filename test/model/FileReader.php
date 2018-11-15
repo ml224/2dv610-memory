@@ -14,9 +14,10 @@ class FileReaderTest extends TestCase
         $sut = $this->getFileReader();
         
         $stub = $this->createMock(Pile::class);
-        $stub->getRowSize()->willReturn(4);
+        $stub->method('getRowSize')
+             ->willReturn(4);
 
-        $this->assertCount($stub->getRowSize(), $sut->getImages(4));
+        $this->assertEquals($stub->getRowSize(), count($sut->getImages(4)));
     }
 
 }
