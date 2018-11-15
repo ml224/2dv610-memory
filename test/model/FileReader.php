@@ -8,20 +8,25 @@ class FileReaderTest extends TestCase
 {
 
     public function test_getImages_shouldReturnFourElements(){
+        $amount = 4;
         $sut = $this->getFileReader();
+        $stub = $this->getStubPile($amount);
         
-        $stub = $this->createMock(Pile::class);
-        $stub->method('getRowSize')
-             ->willReturn(4);
-
-        $this->assertEquals($stub->getRowSize(), count($sut->getImages(4)));
+        $this->assertEquals($stub->getRowSize(), count($sut->getImages($amount)));
     }
 
     
     private function getFileReader(){
         return new FileReader();
     }
-    
+
+    private function getStubPile(int $amount){
+        $stub = $this->createMock(Pile::class);
+        $stub->method('getRowSize')
+             ->willReturn($amount);
+        
+        return $stub;
+    }
 
 }
 
