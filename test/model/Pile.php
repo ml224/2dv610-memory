@@ -14,8 +14,16 @@ class PileTest extends TestCase
         $this->assertInstanceOf(Pile::class, $sut);
     }
 
-    public function test_construct_invalidArgument(){
-        $invalidSizes = array_merge(range(-200, 3), range(7, 200));
+    public function test_construct_invalidArgumentNegativeRange(){
+        $invalidSizes = range(-200, -1);
+        foreach($invalidSizes as $size){
+            $this->expectException(InvalidArgumentException::class);
+            $sut = $this->getSut($size);
+        }
+    }
+
+    public function test_construct_invalidArgumentPositiveRage(){
+        $invalidSizes = array_merge(range(0, 3), range(7, 200));
         foreach($invalidSizes as $size){
             $this->expectException(InvalidArgumentException::class);
             $sut = $this->getSut($size);
