@@ -6,9 +6,6 @@ require_once("../src/model/Pile.php");
 
 class FileReaderTest extends TestCase
 {
-    private function getFileReader(){
-        return new FileReader();
-    }
 
     public function test_getImages_shouldReturnFourElements(){
         $sut = $this->getFileReader();
@@ -19,6 +16,12 @@ class FileReaderTest extends TestCase
 
         $this->assertEquals($stub->getRowSize(), count($sut->getImages(4)));
     }
+
+    
+    private function getFileReader(){
+        return new FileReader();
+    }
+    
 
 }
 
