@@ -15,9 +15,8 @@ class PileTest extends TestCase
     }
 
     public function test_invalidArgument(){
-        $sut = $this->getSut(77);
         $this->expectException(InvalidArgumentException::class);
-
+        $sut = $this->getSut(77);        
     }
 }
 
