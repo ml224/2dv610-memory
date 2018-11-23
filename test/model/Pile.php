@@ -33,6 +33,15 @@ class PileTest extends TestCase
         }
     }
 
+    public function test_getPile_shouldReturnArrayOfCardIds(){
+        $sut = $this->getSut(4);
+        
+        $expectedArrayCount = 8;
+        $actualArrayCount = count($sut->getPile());
+
+        $this->assertSame($expectedArrayCount, $actualArrayCount);
+    }
+
 }
 
 
