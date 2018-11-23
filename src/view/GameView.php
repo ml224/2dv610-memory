@@ -1,7 +1,10 @@
 <?php
 
 class GameView{
-    public function displayGame(){
+    function __construct(){
+
+    }
+    public function displayPile(){
         return "string";
     }
 }
