@@ -1,4 +1,7 @@
 <?php
+
+require_once("FileReader.php");
+
 class Pile{
     private $rowSize;
     
@@ -12,6 +15,17 @@ class Pile{
 
     public function getRowSize(){
         return $this->rowSize;
+    }
+
+    public function getPile(){
+        $fileReader = new FileReader();
+        $images = $fileReader->getImages($this->rowSize);
+        
+        foreach($images as $image){
+            array_push($images, $image);
+        }
+
+        return $images;
     }
 
 }
