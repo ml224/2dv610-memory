@@ -6,16 +6,6 @@ require_once("../src/model/Pile.php");
 
 class FileReaderTest extends TestCase
 {
-
-    public function test_getImages_shouldReturnFourElements(){
-        $amount = 4;
-        $sut = $this->getFileReader();
-        $stub = $this->getStubPile($amount);
-        
-        $this->assertEquals($stub->getRowSize(), count($sut->getImages($amount)));
-    }
-
-    
     private function getFileReader(){
         return new FileReader();
     }
@@ -27,6 +17,15 @@ class FileReaderTest extends TestCase
         
         return $stub;
     }
+
+    public function test_getImages_shouldReturnFourElements(){
+        $amount = 4;
+        $sut = $this->getFileReader();
+        $stub = $this->getStubPile($amount);
+        
+        $this->assertEquals($stub->getRowSize(), count($sut->getImages($amount)));
+    }
+
 
 }
 

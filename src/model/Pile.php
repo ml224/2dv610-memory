@@ -4,6 +4,7 @@ require_once("FileReader.php");
 
 class Pile{
     private $rowSize;
+    private $images;
     
     function __construct(int $amount){
         if($amount == 4 || $amount == 5 || $amount == 6){
@@ -18,14 +19,18 @@ class Pile{
     }
 
     public function getPile(){
-        $fileReader = new FileReader();
-        $images = $fileReader->getImages($this->rowSize);
-        
-        foreach($images as $image){
-            array_push($images, $image);
+        $cards = $this->getCards();
+
+        foreach($cards as $card){
+            array_push($cards, $card);
         }
 
-        return $images;
+        return $cards;
+    }
+
+    private function getCards(){
+        $fileReader = new FileReader();
+        return $fileReader->getImages($this->rowSize);
     }
 
 }
