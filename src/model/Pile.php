@@ -28,6 +28,7 @@ class Pile{
         return $cards;
     }
 
+    //not sure how to test this
     private function getCards(){
         $fileReader = new FileReader();
         return $fileReader->getImages($this->rowSize);
