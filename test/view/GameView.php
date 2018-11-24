@@ -7,13 +7,10 @@ require_once("../src/model/Pile.php");
 
 class GameViewTest extends TestCase
 {
-    public function test_displayPile_shouldReturnString(){
-        $view = new GameView();
-        $this->assertInternalType($view->displayPile(), "string");
-    }
 
     public function test_displayPile_shoulReturnStringWithArrayElements(){
         $sut = new GameView();
+        
         $pile = $this->pileStub();
         $cards = $pile->getPile();
 
@@ -22,7 +19,6 @@ class GameViewTest extends TestCase
         foreach($cards as $c){
             $this->assertRegexp('/'.$c.'/', $html);
         }
-
     }
 
     private function pileStub(){
