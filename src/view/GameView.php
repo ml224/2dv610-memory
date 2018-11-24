@@ -1,12 +1,15 @@
 <?php
 
 class GameView{
-    function __construct(){
+    private $cards;
 
+    function __construct(Array $cards){
+        $this->cards = $cards;
     }
-    public function displayPile($cards){
+    
+    public function displayPile() : string {
         $html = '<div class="cards">';
-        foreach($cards as $card){
+        foreach($this->cards as $card){
             $html .= '<img src="images/'. $card .'">'; 
         }
         $html .= '</div>';
