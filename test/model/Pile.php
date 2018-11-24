@@ -35,11 +35,21 @@ class PileTest extends TestCase
 
     public function test_getPile_shouldReturnArrayWithDoubleCount(){
         $sut = $this->getSut(4);
+        $fileReaderStub = $this->fakeFileReader();
         
         $expectedArrayCount = 8;
-        $actualArrayCount = count($sut->getPile());
+        $actualArrayCount = count($sut->getPile($fileReaderStub));
 
         $this->assertSame($expectedArrayCount, $actualArrayCount);
+    }
+
+    private function fakeFileReader(){
+        $images = array("chicken.png", "cow.png", "fish.png", "sheep.png");    
+        $fakeFileReader = $this->createMock(FileReader::class);
+        $fakeFileReader->method('getImages')
+            ->willReturn($images);
+        
+        return $fakeFileReader;
     }
 
 }
