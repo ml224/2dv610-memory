@@ -4,7 +4,6 @@ require_once("FileReader.php");
 
 class Pile{
     private $rowSize;
-    private $images;
     
     function __construct(int $amount){
         if($amount == 4 || $amount == 5 || $amount == 6){
@@ -12,10 +11,6 @@ class Pile{
         }else{
             throw new InvalidArgumentException();
         }
-    }
-
-    public function getRowSize(){
-        return $this->rowSize;
     }
 
     public function getPile(FileReader $fileReader){

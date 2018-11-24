@@ -25,14 +25,6 @@ class PileTest extends TestCase
         }
     }
 
-    public function test_getRowSize_returnCorrectSize(){
-        $allowedSizes = array(4, 5, 6);
-        foreach($allowedSizes as $size){
-            $sut = $this->getSut($size);
-            $this->assertSame($sut->getRowSize(), $size);
-        }
-    }
-
     public function test_getPile_shouldReturnArrayWithDoubleCount(){
         $sut = $this->getSut(4);
         $fileReaderStub = $this->fakeFileReader();
