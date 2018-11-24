@@ -18,8 +18,8 @@ class Pile{
         return $this->rowSize;
     }
 
-    public function getPile(){
-        $cards = $this->getCards();
+    public function getPile(FileReader $fileReader){
+        $cards = $fileReader->getImages($this->rowSize);
 
         foreach($cards as $card){
             array_push($cards, $card);
@@ -27,11 +27,4 @@ class Pile{
 
         return $cards;
     }
-
-    //not sure how to test this
-    private function getCards(){
-        $fileReader = new FileReader();
-        return $fileReader->getImages($this->rowSize);
-    }
-
 }
