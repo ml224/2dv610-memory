@@ -15,6 +15,14 @@ class FileReaderTest extends TestCase
 
         $this->assertEquals($expectedCount, $actualCount);
     }
+    
+    public function test_getImages_shouldReturnSixElements(){
+        $sut = new FileReader();
+        $expectedCount = 6;
+        $actualCount = count($sut->getImages(6));
+
+        $this->assertEquals($expectedCount, $actualCount);
+    }
 }
 
 
