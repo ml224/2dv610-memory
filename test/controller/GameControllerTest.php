@@ -16,23 +16,33 @@ class GameControllerTest extends TestCase
         $resultString = join($duplicatedCards);
 
         
-        $mockGameView = \Mockery::mock('iGameView');
-        $mockGameView   
-            ->shouldReceive('displayCards')
-            ->with($duplicatedCards)
-            ->andReturn($resultString);
-
-        $mockPile = \Mockery::mock('Pile');
-        $mockPile 
-            ->shouldReceive('getPile')
-            ->andReturn($duplicatedCards);
+        $mockView = $this->fakeGameView($resultString);
+        $stubPile = $this->fakePile($duplicatedCards);
         
         $sut = new GameController();
-        $actual = $sut->runGame($mockPile, $mockGameView);
+        $actual = $sut->runGame($stubPile, $mockView);
         $expected = $resultString;
 
         $this->assertEquals($actual, $expected);
-    }   
+    }
+    
+    private function fakePile($cards){
+        $fake = \Mockery::mock('Pile');
+        $fake 
+            ->shouldReceive('getPile')
+            ->andReturn($cards);
+        return $fake;
+    }
+
+    private function fakeGameView($resultString){
+        $fake = \Mockery::mock('iGameView');
+        $fake   
+            ->shouldReceive('displayCards')
+            ->with(\Mockery::type('array'))
+            ->andReturn($resultString);
+
+        return $fake;
+    }
 
     public function tearDown() {
         \Mockery::close();
