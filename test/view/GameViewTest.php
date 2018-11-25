@@ -7,9 +7,20 @@ require_once("./src/model/FileReader.php");
 
 class GameViewTest extends TestCase
 {
-    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    //use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     
     public function test_displayPile_shoulReturnHtmlWithArrayElements(){
+        $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
+        
+        $sut = new GameView();         
+        $html = $sut->displayCards($cards);
+
+        foreach($cards as $c){
+            $this->assertRegexp('/'.$c.'/', $html);
+        }
+    }
+
+    /*public function test_displayPile_shoulReturnHtmlWithArrayElements(){
         $fileReaderStub = \Mockery::mock('FileReader');
         
         $pileMock = $this->fakePile();
@@ -41,7 +52,7 @@ class GameViewTest extends TestCase
 
     public function tearDown() {
         \Mockery::close();
-    }
+    }*/
 }
 
 

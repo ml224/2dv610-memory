@@ -1,15 +1,12 @@
 <?php
 
-class GameView{
-    private $cards;
+require_once('iGameView.php');
 
-    function __construct(Array $cards){
-        $this->cards = $cards;
-    }
+class GameView implements iGameView{
     
-    public function displayPile() : string {
+    public function displayCards(Array $cards) : string {
         $html = '<div class="cards">';
-        foreach($this->cards as $card){
+        foreach($cards as $card){
             $html .= '<img src="images/'. $card .'">'; 
         }
         $html .= '</div>';
