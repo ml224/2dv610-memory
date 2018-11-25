@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-require_once("../src/model/Pile.php");
+require_once("./src/model/Pile.php");
 
 class PileTest extends TestCase
 {
@@ -34,6 +34,10 @@ class PileTest extends TestCase
 
         $this->assertSame($expectedArrayCount, $actualArrayCount);
     }
+
+    /*public function test_getPile_shuoldReturnElementTwice(){
+        
+    }*/
 
     private function fakeFileReader(){
         $images = array("chicken.png", "cow.png", "fish.png", "sheep.png");    

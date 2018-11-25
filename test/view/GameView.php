@@ -1,18 +1,22 @@
 <?php
 use PHPUnit\Framework\TestCase;
-require_once("../src/view/GameView.php");
-require_once("../src/model/Pile.php");
+require_once("./src/view/GameView.php");
+require_once("./src/model/Pile.php");
+require_once("./src/model/FileReader.php");
 
 
 
 class GameViewTest extends TestCase
 {
+    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
     public function test_displayPile_shoulReturnHtmlWithArrayElements(){
-        $pile = $this->pileStub();
-        $cards = $pile->getPile();
+        $fileReaderStub = $this->fakeFileReader();
+        
+        $pileMock = $this->fakePile();
+        $cards = $pileMock->getPile($fileReaderStub);
 
-        $sut = $this->sut();         
+        $sut = $this->sut($cards);         
         $html = $sut->displayPile();
 
         foreach($cards as $c){
@@ -20,23 +24,25 @@ class GameViewTest extends TestCase
         }
     }
 
-    private function sut(){
-        $pile = $this->pileStub();
-        $cards = $pile->getPile();
-
+    private function sut($cards){
         return new GameView($cards);
     }
 
-    private function pileStub(){
-        $cardsForStub = array("test1","test1", "test2", "test2","test4","test4", "test3", "test3");
+    private function fakePile(){
+        $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
+        $duplicatedCards = array_merge($cards, $cards);
+        
+        $fake = \Mockery::mock('Pile');
+        $fake->shouldReceive('getPile')
+            ->with(FileReader::class)
+            ->andReturn($duplicatedCards);
 
-        $stub = $this->createMock(Pile::class);
-        $stub->method('getPile')
-        ->willReturn($cardsForStub);
-
-        return $stub;
+        return $fake;
     }
 
+    private function fakeFileReader(){
+        return \Mockery::mock('FileReader');
+    }
 }
 
 
