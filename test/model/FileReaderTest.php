@@ -1,7 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
 require_once("./src/model/FileReader.php");
-require_once("./src/model/Pile.php");
 
 
 class FileReaderTest extends TestCase
@@ -9,18 +8,16 @@ class FileReaderTest extends TestCase
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
     public function test_getImages_shouldReturnFourElements(){
-        $sut = new FileReader();
-        $expectedCount = 4;
-        $actualCount = count($sut->getImages(4));
-
-        $this->assertEquals($expectedCount, $actualCount);
+        $this->getImages(4);
     }
     
     public function test_getImages_shouldReturnSixElements(){
-        $sut = new FileReader();
-        $expectedCount = 6;
-        $actualCount = count($sut->getImages(6));
+        $this->getImages(6);
+    }
 
+    private function getImages($expectedCount){
+        $sut = new FileReader();
+        $actualCount = count($sut->getImages($expectedCount));
         $this->assertEquals($expectedCount, $actualCount);
     }
 }
