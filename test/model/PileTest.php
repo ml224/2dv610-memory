@@ -35,10 +35,6 @@ class PileTest extends TestCase
         $this->assertSame($expectedArrayCount, $actualArrayCount);
     }
 
-    /*public function test_getPile_shuoldReturnElementTwice(){
-        
-    }*/
-
     private function fakeFileReader(){
         $images = array("chicken.png", "cow.png", "fish.png", "sheep.png");    
         $fakeFileReader = $this->createMock(FileReader::class);

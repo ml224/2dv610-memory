@@ -5,13 +5,12 @@ require_once("./src/model/Pile.php");
 require_once("./src/model/FileReader.php");
 
 
-
 class GameViewTest extends TestCase
 {
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-
+    
     public function test_displayPile_shoulReturnHtmlWithArrayElements(){
-        $fileReaderStub = $this->fakeFileReader();
+        $fileReaderStub = \Mockery::mock('FileReader');
         
         $pileMock = $this->fakePile();
         $cards = $pileMock->getPile($fileReaderStub);
@@ -24,24 +23,24 @@ class GameViewTest extends TestCase
         }
     }
 
-    private function sut($cards){
-        return new GameView($cards);
-    }
-
     private function fakePile(){
         $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
         $duplicatedCards = array_merge($cards, $cards);
         
         $fake = \Mockery::mock('Pile');
         $fake->shouldReceive('getPile')
-            ->with(FileReader::class)
+            ->with('FileReader')
             ->andReturn($duplicatedCards);
 
         return $fake;
+    }   
+    
+    private function sut($cards){
+        return new GameView($cards);
     }
 
-    private function fakeFileReader(){
-        return \Mockery::mock('FileReader');
+    public function tearDown() {
+        \Mockery::close();
     }
 }
 

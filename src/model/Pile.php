@@ -13,6 +13,10 @@ class Pile{
         }
     }
 
+    public function getRowSize(){
+        return $rowSize;
+    }
+
     public function getPile(FileReader $fileReader){
         $cards = $fileReader->getImages($this->rowSize);
 
