@@ -7,8 +7,14 @@ class GameView implements iGameView{
 
     public function displayGame(Array $cards) : string {
         return 
-        '<link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">' . 
-        $this->displayCards($cards);
+        '
+        <!DOCTYPE html>
+        <head>
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">         
+        </head>
+        <body>'.$this->displayCards($cards) .'</body>
+        '; 
     }
     
     private function displaycards(Array $cards) : string {
