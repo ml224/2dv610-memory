@@ -14,6 +14,11 @@ class GameViewTest extends TestCase
         $regexArray = array('/link rel="stylesheet" type="text\/css" href="public\/css\/stylesheet.css"/');
         $this->displayGame_matchRegex($regexArray);
     }
+
+    public function test_displayGame_shouldReturnHtmlTemplateWithValidDocumentTags(){
+        $regexArray = array('/!DOCTYPE html/', '/head/', '/\/head/', '/body/', '/\/body/', '/title/', '/\/title/');
+        $this->displayGame_matchRegex($regexArray);
+    }
     
     
     public function test_displayGame_imagesShouldContainValidImagePath(){
