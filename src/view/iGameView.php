@@ -2,5 +2,5 @@
 
 interface iGameView
 {
-    public function displayCards(Array $cards);
+    public function displayGame(Array $cards);
 }

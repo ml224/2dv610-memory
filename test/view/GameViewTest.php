@@ -11,25 +11,23 @@ class GameViewTest extends TestCase
     private $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
 
     public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
-        $regex = '/link rel="stylesheet" type="text\/css" href="public\/css\/stylesheet.css"/';
-        $sut = new GameView();
-        $html = $sut->displayGame($this->cards);
-        $this->assertRegexp($regex, $html);
+        $regexArray = array('/link rel="stylesheet" type="text\/css" href="public\/css\/stylesheet.css"/');
+        $this->displayGame_matchRegex($regexArray);
     }
     
     
-    public function test_displayCards_imagesShouldContainValidImagePath(){
+    public function test_displayGame_imagesShouldContainValidImagePath(){
         $regexArray = array();
         foreach($this->cards as $c){
             array_push($regexArray, '/img src="public\/images\/' . $c ."/");
         }
 
-        $this->displayCards_matchRegexEachCard($regexArray);
+        $this->displayGame_matchRegex($regexArray);
     }
 
-    private function displayCards_matchRegexEachCard(Array $regexArray){
+    private function displayGame_matchRegex(Array $regexArray){
         $sut = new GameView();
-        $html = $sut->displayCards($this->cards);
+        $html = $sut->displayGame($this->cards);
         
         foreach($regexArray as $regex){
             $this->assertRegexp($regex, $html);
