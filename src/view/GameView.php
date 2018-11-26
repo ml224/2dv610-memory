@@ -2,10 +2,14 @@
 require_once('iGameView.php');
 
 class GameView implements iGameView{
-
+    
     private $cards;
 
-    public function displayGame(Array $cards) : string {
+    function __construct(Array $cards) {
+        $this->cards = $cards;
+    } 
+
+    public function displayGame() : string {
         return 
         '
         <!DOCTYPE html>
@@ -13,13 +17,13 @@ class GameView implements iGameView{
         <title></title>
         <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">         
         </head>
-        <body>'.$this->displayCards($cards) .'</body>
+        <body>'.$this->displayCards() .'</body>
         '; 
     }
     
-    private function displaycards(Array $cards) : string {
+    private function displaycards() : string {
         $html = '<div class="cards">';
-        foreach($cards as $card){
+        foreach($this->cards as $card){
             $html .= '<img src="public/images/'. $card .'">'; 
         }
         $html .= '</div>';

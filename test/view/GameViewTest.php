@@ -31,8 +31,8 @@ class GameViewTest extends TestCase
     }
 
     private function displayGame_matchRegex(Array $regexArray){
-        $sut = new GameView();
-        $html = $sut->displayGame($this->cards);
+        $sut = new GameView($this->cards);
+        $html = $sut->displayGame();
         
         foreach($regexArray as $regex){
             $this->assertRegexp($regex, $html);
