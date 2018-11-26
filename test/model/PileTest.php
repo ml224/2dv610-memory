@@ -35,6 +35,14 @@ class PileTest extends TestCase
         $this->assertSame($expectedArrayCount, $actualArrayCount);
     }
 
+    public function test_removeFromPile_shouldRemoveImageFromPile(){
+        $sut = $this->getSut(4);
+        $sut->removeFromPile("cow.png");
+        $expectedPileCount = 14;
+        $actualPileCount = count($sut->getPile($this->fakeFileReader()));
+        $this->assertSame($expectedPileCount, $actualPileCount);
+    }
+
     private function fakeFileReader(){
         $images = array("chicken.png", "cow.png", "fish.png", "sheep.png");    
         $fakeFileReader = $this->createMock(FileReader::class);
