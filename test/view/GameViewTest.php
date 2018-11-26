@@ -9,7 +9,7 @@ class GameViewTest extends TestCase
 {
     //use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     
-    public function test_displayPile_shoulReturnHtmlWithArrayElements(){
+    public function test_displayCards_shoulReturnHtmlWithArrayElements(){
         $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
         
         $sut = new GameView();         
@@ -20,39 +20,16 @@ class GameViewTest extends TestCase
         }
     }
 
-    /*public function test_displayPile_shoulReturnHtmlWithArrayElements(){
-        $fileReaderStub = \Mockery::mock('FileReader');
-        
-        $pileMock = $this->fakePile();
-        $cards = $pileMock->getPile($fileReaderStub);
+    public function test_displayCards_shouldReturnValidImagePath(){
+        $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
 
-        $sut = $this->sut($cards);         
-        $html = $sut->displayPile();
+        $sut = new GameView();
+        $html = $sut->displayCards($cards);
 
         foreach($cards as $c){
-            $this->assertRegexp('/'.$c.'/', $html);
+            $this->assertRegexp('/src="public\/images\/'. $c .'/', $html);
         }
     }
-
-    private function fakePile(){
-        $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
-        $duplicatedCards = array_merge($cards, $cards);
-        
-        $fake = \Mockery::mock('Pile');
-        $fake->shouldReceive('getPile')
-            ->with('FileReader')
-            ->andReturn($duplicatedCards);
-
-        return $fake;
-    }   
-    
-    private function sut($cards){
-        return new GameView($cards);
-    }
-
-    public function tearDown() {
-        \Mockery::close();
-    }*/
 }
 
 

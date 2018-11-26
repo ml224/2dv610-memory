@@ -1,10 +1,9 @@
 <?php
 
-require_once('iGameView.php');
-
-class GameView implements iGameView{
+class GameView{
+    private $cards;
     
-    public function displayCards(Array $cards) : string {
+    public function displaycards(Array $cards) : string {
         $html = '<div class="cards">';
         foreach($cards as $card){
             $html .= '<img src="images/'. $card .'">'; 
