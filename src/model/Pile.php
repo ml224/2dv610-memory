@@ -4,30 +4,24 @@ class Pile{
     private $rowSize;
     private $pile;
 
-    function __construct(int $amount){
-        if($amount == 4 || $amount == 5 || $amount == 6){
-            $this->rowSize = $amount;
-            $this->pile = $this->getNewPile($amount);
-        }else{
+    function __construct(Array $images){
+        if($this->invalidSize($images)){
             throw new InvalidArgumentException();
+        } 
+        
+        $this->pile = array_merge($images, $images);
+    }
+
+    private function invalidSize(Array $images) : bool {
+        $allowedSizes = [4, 5, 6];
+        foreach($allowedSizes as $size){
+            if(count($images) === $size){
+                return false;
+            }
         }
+
+        return true;
     }
-
-    private function getNewPile($amount){
-        $fr = new FileReader();
-        $cards = $fr->getImages($this->rowSize);
-
-        foreach($cards as $card){
-            array_push($cards, $card);
-        }
-
-        return $cards;
-    }
-
-    public function getRowSize(){
-        return $rowSize;
-    }
-
 
     public function getPile(){
         return $this->pile;
