@@ -10,6 +10,14 @@ class GameViewTest extends TestCase
     //use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     private $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
 
+    public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
+        $regex = '/link rel="stylesheet" type="text\/css" href="public\/css\/stylesheet.css"/';
+        $sut = new GameView();
+        $html = $sut->displayGame($this->cards);
+        $this->assertRegexp($regex, $html);
+    }
+    
+    
     public function test_displayCards_imagesShouldContainValidImagePath(){
         $regexArray = array();
         foreach($this->cards as $c){
@@ -27,6 +35,8 @@ class GameViewTest extends TestCase
             $this->assertRegexp($regex, $html);
         }
     }
+
+
 }
 
 

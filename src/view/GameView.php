@@ -1,6 +1,8 @@
 <?php
+require_once('iGameView.php');
 
-class GameView{
+class GameView implements iGameView{
+
     private $cards;
     
     public function displaycards(Array $cards) : string {
