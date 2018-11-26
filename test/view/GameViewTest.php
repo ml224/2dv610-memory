@@ -8,26 +8,23 @@ require_once("./src/model/FileReader.php");
 class GameViewTest extends TestCase
 {
     //use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-    
-    public function test_displayCards_shoulReturnHtmlWithArrayElements(){
-        $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
-        
-        $sut = new GameView();         
-        $html = $sut->displayCards($cards);
+    private $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
 
-        foreach($cards as $c){
-            $this->assertRegexp('/'.$c.'/', $html);
+    public function test_displayCards_imagesShouldContainValidImagePath(){
+        $regexArray = array();
+        foreach($this->cards as $c){
+            array_push($regexArray, '/img src="public\/images\/' . $c ."/");
         }
+
+        $this->displayCards_matchRegexEachCard($regexArray);
     }
 
-    public function test_displayCards_shouldReturnValidImagePath(){
-        $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
-
+    private function displayCards_matchRegexEachCard(Array $regexArray){
         $sut = new GameView();
-        $html = $sut->displayCards($cards);
-
-        foreach($cards as $c){
-            $this->assertRegexp('/src="public\/images\/'. $c .'/', $html);
+        $html = $sut->displayCards($this->cards);
+        
+        foreach($regexArray as $regex){
+            $this->assertRegexp($regex, $html);
         }
     }
 }
