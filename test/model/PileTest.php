@@ -38,7 +38,7 @@ class PileTest extends TestCase
     public function test_removeFromPile_shouldRemoveImageFromPile(){
         $sut = $this->getSut(4);
         $sut->removeFromPile("cow.png");
-        $expectedPileCount = 14;
+        $expectedPileCount = 6;
         $actualPileCount = count($sut->getPile($this->fakeFileReader()));
         $this->assertSame($expectedPileCount, $actualPileCount);
     }

@@ -24,6 +24,7 @@ class GameView implements iGameView{
     private function displaycards() : string {
         $html = '<div class="cards">';
         foreach($this->cards as $card){
+            echo $card;
             $html .= '<img src="public/images/'. $card .'">'; 
         }
         $html .= '</div>';

@@ -10,36 +10,21 @@ class GameControllerTest extends TestCase
 {
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     
-    public function test_runGame_shouldRenderHtmlWithPileElements(){
-        $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
-        $duplicatedCards = array_merge($cards, $cards);
-        $resultString = join($duplicatedCards);
-
-        
-        $mockView = $this->fakeGameView($resultString);
-        $stubPile = $this->fakePile($duplicatedCards);
-        
+    public function test_runGame_shouldReturnHtmlFromView(){
+        $mockView = $this->fakeGameView();
         $sut = new GameController();
-        $actual = $sut->runGame($stubPile, $mockView);
-        $expected = $resultString;
+        
+        $actual = $sut->runGame($mockView);
+        $expected = $mockView->displayGame();
 
         $this->assertEquals($actual, $expected);
     }
-    
-    private function fakePile($cards){
-        $fake = \Mockery::mock('Pile');
-        $fake 
-            ->shouldReceive('getPile')
-            ->andReturn($cards);
-        return $fake;
-    }
 
-    private function fakeGameView($resultString){
+    private function fakeGameView(){
         $fake = \Mockery::mock('iGameView');
         $fake   
-            ->shouldReceive('displayCards')
-            ->with(\Mockery::type('array'))
-            ->andReturn($resultString);
+            ->shouldReceive('displayGame')
+            ->andReturn("Some HTML");
 
         return $fake;
     }
