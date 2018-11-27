@@ -51,6 +51,11 @@ class PileTest extends TestCase
         $this->assertTrue($sut->isEmpty());
     }
 
+    public function test_isEmpty_shouldReturnFalseIfNotEmpty(){
+        $sut = $this->sut($this->images);
+        $this->assertFalse($sut->isEmpty());
+    }
+
     public function test_removeFromPile_shouldRemoveImageFromPile(){
         $sut = $this->sut($this->images);
         $sut->removeFromPile("cow.png");
