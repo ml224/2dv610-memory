@@ -34,4 +34,8 @@ class GameView implements iGameView{
 
         return $html;
     }
+
+    public function getClickedImageName(){
+        return 'cow.png';
+    }
 }
