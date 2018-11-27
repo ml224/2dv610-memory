@@ -32,7 +32,16 @@ class GameViewTest extends TestCase
     public function test_displayGame_imageInputShouldContainValidImageFormData(){
         $regexArray = array();
         foreach($this->cards as $c){
-            array_push($regexArray, '/input type="image" value="' . $c . '" src="public\/images\/' . $c ."/");
+            array_push($regexArray, '/input type="image" src="public\/images\/' . $c ."/");
+        }
+
+        $this->displayGame_matchRegex($regexArray);
+    }
+
+    public function test_displayGame_imageFormShouldContainHiddenInputTag(){
+        $regexArray = array();
+        foreach($this->cards as $c){
+            array_push($regexArray, '/input type="hidden" name="clicked_image" value="'.$c.'"/');
         }
 
         $this->displayGame_matchRegex($regexArray);
