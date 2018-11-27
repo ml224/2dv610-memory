@@ -9,6 +9,7 @@ class GameViewTest extends TestCase
 {
     //use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     private $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
+    private $cardClicked = 'clicked_image';
     
     private function sut(){
         return new GameView($this->cards);
@@ -57,7 +58,7 @@ class GameViewTest extends TestCase
 
     private function getClickedImageName_testPostValue($value){
         $sut = $this->sut();
-        $_POST['clicked_image'] = $value;
+        $this->setPost($value);
         $this->assertSame($value, $sut->getClickedImageName());
     }
 
@@ -71,9 +72,14 @@ class GameViewTest extends TestCase
     }
 
     public function test_cardClicked_shouldReturnTrue(){
+        $this->setPost('cow.png');
         $sut = $this->sut();
-        $_POST['clicked_image'] = 'cow.png';
-        $this->assertTrue($sut->cardClicked());
+        $cardClicked = $sut->cardClicked();
+        $this->assertTrue($cardClicked);
+    }
+
+    private function setPost($value){
+        $_POST[$this->cardClicked] = $value;
     }
 
 
