@@ -34,6 +34,13 @@ class GameViewTest extends TestCase
         $this->displayGame_matchRegex($regexArray);
     }
 
+    public function test_getClickedImageName_shouldReturnStringOnPost(){
+        $sut = new GameView($this->cards);
+        $_POST['clicked_image'] = 'cow.png';
+        $this->assertSame('cow.png', $sut->getClickedImageName());
+
+    }
+
     private function displayGame_matchRegex(Array $regexArray){
         $sut = new GameView($this->cards);
         $html = $sut->displayGame();
