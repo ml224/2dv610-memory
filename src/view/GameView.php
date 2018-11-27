@@ -22,11 +22,11 @@ class GameView implements iGameView{
     }
     
     private function displaycards() : string {
-        $html = '<div class="cards">';
+        $html = '<form method="post" class="cards">';
         foreach($this->cards as $card){
-            $html .= '<img src="public/images/'. $card .'">'; 
+            $html .= '<input type="image" src="public/images/'. $card .'">'; 
         }
-        $html .= '</div>';
+        $html .= '</form>';
 
         return $html;
     }

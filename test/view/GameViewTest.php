@@ -21,14 +21,14 @@ class GameViewTest extends TestCase
     }
     
     public function test_displayGame_shouldReturnForm(){
-        $regexArray = array('/form method="post"/', '/\/form/', '/input type="submit"/');
+        $regexArray = array('/form method="post"/', '/\/form/');
         $this->displayGame_matchRegex($regexArray);
     }
     
     public function test_displayGame_imagesShouldContainValidImagePath(){
         $regexArray = array();
         foreach($this->cards as $c){
-            array_push($regexArray, '/img src="public\/images\/' . $c ."/");
+            array_push($regexArray, '/input type="image" src="public\/images\/' . $c ."/");
         }
 
         $this->displayGame_matchRegex($regexArray);
