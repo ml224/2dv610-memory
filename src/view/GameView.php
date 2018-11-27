@@ -10,6 +10,14 @@ class GameView implements iGameView{
         $this->cards = $cards;
     } 
 
+    public function displayGameOptions(){
+        return '
+        <input type="hidden" name="game_option" value="4">
+        <input type="hidden" name="game_option" value="5"> 
+        <input type="hidden" name="game_option" value="6">
+        ';
+    }
+
     public function displayGame() : string {
         if(isset($_POST[$this->clickedCard])){
             echo $this->getClickedImageName();
