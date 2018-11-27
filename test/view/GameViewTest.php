@@ -13,6 +13,16 @@ class GameViewTest extends TestCase
     
     private function sut(){
         return new GameView($this->cards);
+    }
+    
+    public function test_displayGameOptions_shouldReturnHiddenElementsWithOptions(){
+        $regexArray = array('/input type="hidden" name="game_option" value="4"/', '/input type="hidden" name="game_option" value="5"/', '/input type="hidden" name="game_option" value="6"/');
+        $sut = $this->sut();
+        $html = $sut->displayGameOptions();
+        
+        foreach($regexArray as $regex){
+            $this->assertRegexp($regex, $html);
+        }
     } 
 
     public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
@@ -78,10 +88,21 @@ class GameViewTest extends TestCase
         $this->assertTrue($cardClicked);
     }
 
+    public function test_cardClicked_shouldReturnFalse(){
+        if(isset($_POST[$this->cardClicked])){
+            unset($_POST[$this->cardClicked]);
+        }
+
+        $sut = $this->sut();
+        $cardClicked = $sut->cardClicked();
+        $this->assertFalse($cardClicked);
+    }
+
     private function setPost($value){
         $_POST[$this->cardClicked] = $value;
     }
 
+  
 
 
 }

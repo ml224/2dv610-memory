@@ -48,6 +48,6 @@ class GameView implements iGameView{
     }
 
     public function cardClicked(){
-        return true;
+        return isset($_POST[$this->clickedCard]);
     }
 }
