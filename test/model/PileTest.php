@@ -22,12 +22,7 @@ class PileTest extends TestCase
          $this->expectException(InvalidArgumentException::class);
          $sut = $this->sut($invalidArray);
     }
-/*
-    public function test_construct_throwExceptionIfInvalidArgument(){
-        $this->expectException(InvalidArgumentException::class);
-        $sut = $this->sut($size);
-    }
-*/
+
     public function test_getPile_shouldReturnArrayWithDoubleCount(){
         $sut = $this->sut($this->images);
         
@@ -36,10 +31,25 @@ class PileTest extends TestCase
 
         $this->assertSame($expectedArrayCount, $actualArrayCount);
     }
-/*
-    public function test_getPile_shouldReturnTwoElementsOfEachCard(){
 
-    }*/
+    public function test_getPile_shouldReturnTwoElementsOfEachCard(){
+        $sut = $this->sut($this->images);
+        $numberOfOccurences = array_count_values($sut->getPile());
+        $sameValueMerged = array_unique($numberOfOccurences);
+        $eachElementAppearsTwice = count($sameValueMerged) === 1 && count($numberOfOccurences) === 4;
+
+        $this->assertTrue($eachElementAppearsTwice);
+
+    }
+
+    public function test_isEmpty_shouldReturnTrueIfPileIsEmpty(){
+        $sut = $this->sut($this->images);
+        foreach($sut->getPile() as $card){
+            $sut->removeFromPile($card);
+        }
+
+        $this->assertTrue($sut->isEmpty());
+    }
 
     public function test_removeFromPile_shouldRemoveImageFromPile(){
         $sut = $this->sut($this->images);
@@ -50,15 +60,6 @@ class PileTest extends TestCase
         
         $this->assertSame($expectedPileCount, $actualPileCount);
     }
-/*
-    private function fakeFileReader(){
-        $fakeFileReader = $this->createMock(FileReader::class);
-        $fakeFileReader->method('getImages')
-            ->willReturn($images);
-        
-        return $fakeFileReader;
-    }
-*/
 }
 
 
