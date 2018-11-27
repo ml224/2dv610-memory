@@ -42,7 +42,7 @@ class PileTest extends TestCase
 
     }
 
-    public function test_isEmpty_shouldReturnTrueIfPileIsEmpty(){
+    public function test_isEmpty_shouldReturnTrueIfEmptyPile(){
         $sut = $this->sut($this->images);
         foreach($sut->getPile() as $card){
             $sut->removeFromPile($card);
