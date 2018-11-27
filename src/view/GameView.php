@@ -29,7 +29,9 @@ class GameView implements iGameView{
     private function displaycards() : string {
         $html = '<form method="post">';
         foreach($this->cards as $card){
-            $html .= '<input type="image" src="public/images/'. $card .'">'; 
+            $html .= '
+            <input type="hidden" name="'.$this->clickedCard.'" value="'.$card.'">
+            <input type="image" src="public/images/'. $card .'">'; 
         }
         $html .= '</form>';
 
