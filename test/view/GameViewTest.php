@@ -20,6 +20,11 @@ class GameViewTest extends TestCase
         $this->displayGameOptions_matchRegex($regexArray);
     } 
 
+    public function test_displayGameOptions_shouldReturnButtonElementsWithOptions(){
+        $regexArray = array('/input type="button" name="game_option" value="8 brickor"/', '/input type="hidden" name="game_option" value="10 brickor"/', '/input type="hidden" name="game_option" value="12 brickor"/');
+        $this->displayGameOptions_matchRegex($regexArray);
+    } 
+
     public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
         $regexArray = array('/link rel="stylesheet" type="text\/css" href="public\/css\/stylesheet.css"/');
         $this->displayGame_matchRegex($regexArray);
@@ -105,9 +110,6 @@ class GameViewTest extends TestCase
     private function setPost($value){
         $_POST[$this->cardClicked] = $value;
     }
-
-  
-
 
 }
 
