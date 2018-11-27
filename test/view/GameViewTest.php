@@ -42,6 +42,12 @@ class GameViewTest extends TestCase
         $sut = $this->sut();
         $_POST['clicked_image'] = 'cow.png';
         $this->assertSame('cow.png', $sut->getClickedImageName());
+    }
+
+    public function test_getClickedImageName_shouldReturnPostVariableOnPost(){
+        $sut = $this->sut();
+        $_POST['clicked_image'] = 'sheep.png';
+        $this->assertSame('sheep.png', $sut->getClickedImageName());
 
     }
 
