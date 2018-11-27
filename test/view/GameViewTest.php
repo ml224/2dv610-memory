@@ -21,7 +21,7 @@ class GameViewTest extends TestCase
     } 
 
     public function test_displayGameOptions_shouldReturnButtonElementsWithOptions(){
-        $regexArray = array('/input type="button" name="game_option" value="8 brickor"/', '/input type="hidden" name="game_option" value="10 brickor"/', '/input type="hidden" name="game_option" value="12 brickor"/');
+        $regexArray = array('/input type="button" name="game_option" value="8 brickor"/', '/input type="button" name="game_option" value="10 brickor"/', '/input type="button" name="game_option" value="12 brickor"/');
         $this->displayGameOptions_matchRegex($regexArray);
     } 
 

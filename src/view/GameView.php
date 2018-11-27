@@ -13,8 +13,13 @@ class GameView implements iGameView{
     public function displayGameOptions(){
         return '
         <input type="hidden" name="game_option" value="4">
+        <input type="button" name="game_option" value="8 brickor">
+
         <input type="hidden" name="game_option" value="5"> 
+        <input type="button" name="game_option" value="10 brickor"> 
+
         <input type="hidden" name="game_option" value="6">
+        <input type="button" name="game_option" value="12 brickor">
         ';
     }
 
