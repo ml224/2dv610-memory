@@ -5,7 +5,8 @@ require_once('src/model/Pile.php');
 require_once('src/model/FileReader.php');
 require_once('src/controller/GameController.php');
 
-$pile = new Pile(4);
+$reader = new FileReader(); 
+$pile = new Pile($reader->getImages(4));
 $gameView = new GameView($pile->getPile());
 $controller = new GameController();
 echo $controller->runGame($gameView);

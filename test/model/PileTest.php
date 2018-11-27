@@ -4,6 +4,8 @@ require_once("./src/model/Pile.php");
 
 class PileTest extends TestCase
 {
+    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+
     private $images = array("cow.png", "shrimp.png", "chicken.png", "fish.png");
     
     private function sut(Array $images){  
@@ -64,6 +66,10 @@ class PileTest extends TestCase
         $actualPileCount = count($sut->getPile());
         
         $this->assertSame($expectedPileCount, $actualPileCount);
+    }
+
+    public function tearDown() {
+        \Mockery::close();
     }
 }
 

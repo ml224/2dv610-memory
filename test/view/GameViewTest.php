@@ -20,6 +20,10 @@ class GameViewTest extends TestCase
         $this->displayGame_matchRegex($regexArray);
     }
     
+    public function test_displayGame_shouldReturnForm(){
+        $regexArray = array('/form method="post"/', '/\/form/', '/input type="submit"/');
+        $this->displayGame_matchRegex($regexArray);
+    }
     
     public function test_displayGame_imagesShouldContainValidImagePath(){
         $regexArray = array();
@@ -38,6 +42,7 @@ class GameViewTest extends TestCase
             $this->assertRegexp($regex, $html);
         }
     }
+
 
 
 }
