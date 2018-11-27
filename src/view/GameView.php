@@ -17,12 +17,16 @@ class GameView implements iGameView{
         <title></title>
         <link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">         
         </head>
-        <body>'.$this->displayCards() .'</body>
+        <body>
+        <div class="cards">
+        '. $this->displayCards() .'
+        </div>
+        </body>
         '; 
     }
     
     private function displaycards() : string {
-        $html = '<form method="post" class="cards">';
+        $html = '<form method="post">';
         foreach($this->cards as $card){
             $html .= '<input type="image" src="public/images/'. $card .'">'; 
         }
