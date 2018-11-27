@@ -17,12 +17,7 @@ class GameViewTest extends TestCase
     
     public function test_displayGameOptions_shouldReturnHiddenElementsWithOptions(){
         $regexArray = array('/input type="hidden" name="game_option" value="4"/', '/input type="hidden" name="game_option" value="5"/', '/input type="hidden" name="game_option" value="6"/');
-        $sut = $this->sut();
-        $html = $sut->displayGameOptions();
-        
-        foreach($regexArray as $regex){
-            $this->assertRegexp($regex, $html);
-        }
+        $this->displayGameOptions_matchRegex($regexArray);
     } 
 
     public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
@@ -75,6 +70,15 @@ class GameViewTest extends TestCase
     private function displayGame_matchRegex(Array $regexArray){
         $sut = $this->sut();
         $html = $sut->displayGame();
+        
+        foreach($regexArray as $regex){
+            $this->assertRegexp($regex, $html);
+        }
+    }
+
+    private function displaygameOptions_matchRegex(Array $regexArray){
+        $sut = $this->sut();
+        $html = $sut->displayGameOptions();
         
         foreach($regexArray as $regex){
             $this->assertRegexp($regex, $html);
