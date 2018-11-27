@@ -29,7 +29,7 @@ class GameViewTest extends TestCase
         $this->displayGame_matchRegex($regexArray);
     }
     
-    public function test_displayGame_imageInputShouldContainValidImagePath(){
+    public function test_displayGame_imageInputShouldContainValidImageFormData(){
         $regexArray = array();
         foreach($this->cards as $c){
             array_push($regexArray, '/input type="image" value="' . $c . '" src="public\/images\/' . $c ."/");
