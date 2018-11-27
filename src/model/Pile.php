@@ -28,9 +28,9 @@ class Pile{
     }
 
     public function isEmpty(){
-        return true;
+        return empty($this->pile);
     }
-    
+
     public function removeFromPile($card){
         $this->pile = array_diff($this->pile, array($card));
     }
