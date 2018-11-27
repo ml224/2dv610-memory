@@ -11,6 +11,9 @@ class GameView implements iGameView{
     } 
 
     public function displayGame() : string {
+        if(isset($_POST[$this->clickedCard])){
+            echo $this->getClickedImageName();
+        }
         return 
         '
         <!DOCTYPE html>
@@ -27,13 +30,15 @@ class GameView implements iGameView{
     }
     
     private function displaycards() : string {
-        $html = '<form method="post">';
+        $html = '';
         foreach($this->cards as $card){
             $html .= '
+            <form method="post">
             <input type="hidden" name="'.$this->clickedCard.'" value="'.$card.'">
-            <input type="image" src="public/images/'. $card .'">'; 
+            <input type="image" src="public/images/'. $card .'">
+            </form>
+            '; 
         }
-        $html .= '</form>';
 
         return $html;
     }
