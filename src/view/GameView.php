@@ -46,4 +46,8 @@ class GameView implements iGameView{
     public function getClickedImageName(){
         return $_POST[$this->clickedCard];
     }
+
+    public function cardClicked(){
+        return true;
+    }
 }
