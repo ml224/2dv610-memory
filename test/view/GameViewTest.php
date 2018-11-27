@@ -38,17 +38,18 @@ class GameViewTest extends TestCase
         $this->displayGame_matchRegex($regexArray);
     }
 
-    public function test_getClickedImageName_shouldReturnStringOnPost(){
-        $sut = $this->sut();
-        $_POST['clicked_image'] = 'cow.png';
-        $this->assertSame('cow.png', $sut->getClickedImageName());
+    public function test_getClickedImageName_shouldReturnCowPng(){
+        $this->getClickedImageName_testPostValue('cow.png');
     }
 
-    public function test_getClickedImageName_shouldReturnPostVariableOnPost(){
-        $sut = $this->sut();
-        $_POST['clicked_image'] = 'sheep.png';
-        $this->assertSame('sheep.png', $sut->getClickedImageName());
+    public function test_getClickedImageName_shouldReturnSheepPng(){
+        $this->getClickedImageName_testPostValue('sheep.png');
+    }
 
+    private function getClickedImageName_testPostValue($value){
+        $sut = $this->sut();
+        $_POST['clicked_image'] = $value;
+        $this->assertSame($value, $sut->getClickedImageName());
     }
 
     private function displayGame_matchRegex(Array $regexArray){

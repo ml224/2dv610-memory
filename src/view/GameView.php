@@ -4,6 +4,7 @@ require_once('iGameView.php');
 class GameView implements iGameView{
     
     private $cards;
+    private $clickedCard = 'clicked_image';
 
     function __construct(Array $cards) {
         $this->cards = $cards;
@@ -36,6 +37,6 @@ class GameView implements iGameView{
     }
 
     public function getClickedImageName(){
-        return $_POST['clicked_image'];
+        return $_POST[$this->clickedCard];
     }
 }
