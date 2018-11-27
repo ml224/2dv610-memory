@@ -9,6 +9,10 @@ class GameViewTest extends TestCase
 {
     //use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     private $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
+    
+    private function sut(){
+        return new GameView($this->cards);
+    } 
 
     public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
         $regexArray = array('/link rel="stylesheet" type="text\/css" href="public\/css\/stylesheet.css"/');
@@ -35,14 +39,14 @@ class GameViewTest extends TestCase
     }
 
     public function test_getClickedImageName_shouldReturnStringOnPost(){
-        $sut = new GameView($this->cards);
+        $sut = $this->sut();
         $_POST['clicked_image'] = 'cow.png';
         $this->assertSame('cow.png', $sut->getClickedImageName());
 
     }
 
     private function displayGame_matchRegex(Array $regexArray){
-        $sut = new GameView($this->cards);
+        $sut = $this->sut();
         $html = $sut->displayGame();
         
         foreach($regexArray as $regex){
