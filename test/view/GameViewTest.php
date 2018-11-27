@@ -70,6 +70,12 @@ class GameViewTest extends TestCase
         }
     }
 
+    public function test_cardClicked_shouldReturnTrue(){
+        $sut = $this->sut();
+        $_POST['clicked_image'] = 'cow.png';
+        $this->assertTrue($sut->cardClicked());
+    }
+
 
 
 }
