@@ -19,6 +19,18 @@ class GameControllerTest extends TestCase
 
         $this->assertEquals($actual, $expected);
     }
+    
+    public function test_runGame_shouldDisplayOptionsWhenNewGameRequestTrue(){
+        $mockView = $this->fakeGameView();
+        $mockView->shouldReceive('newGameRequest')->andReturn(true);
+        
+        $sut = new GameController();
+        
+        $actual = $sut->runGame($mockView);
+        $expected = $mockView->displayOptions();
+
+        $this->assertEquals($actual, $expected);
+    }
 
     private function fakeGameView(){
         $fake = \Mockery::mock('iGameView');
