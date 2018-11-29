@@ -11,8 +11,9 @@ class GameControllerTest extends TestCase
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     
     public function test_runGame_shouldDisplayGameWhenNewGameRequestFalse(){
-        $mockView = $this->fakeGameView();
-        $mockView->shouldReceive('newGameRequest')->andReturn(false);
+        $newGameRequest = false;
+        $mockView = $this->fakeGameView($newGameRequest);
+
         $sut = new GameController();
         
         $actual = $sut->runGame($mockView);
@@ -22,8 +23,8 @@ class GameControllerTest extends TestCase
     }
     
     public function test_runGame_shouldDisplayOptionsWhenNewGameRequestTrue(){
-        $mockView = $this->fakeGameView();
-        $mockView->shouldReceive('newGameRequest')->andReturn(true);
+        $newGameRequest = true;
+        $mockView = $this->fakeGameView($newGameRequest);
         
         $sut = new GameController();
         
@@ -33,7 +34,7 @@ class GameControllerTest extends TestCase
         $this->assertEquals($actual, $expected);
     }
 
-    private function fakeGameView(){
+    private function fakeGameView($newGameRequest){
         $fake = \Mockery::mock('iGameView');
         $fake   
             ->shouldReceive('displayGame')
@@ -43,10 +44,10 @@ class GameControllerTest extends TestCase
            ->shouldReceive('displayOptions')
            ->andReturn('Display Options');
 
-        /*$fake   
+        $fake   
             ->shouldReceive('newGameRequest')
-            ->andReturn(false);
-        */
+            ->andReturn($newGameRequest);
+        
         return $fake;
     }
 
