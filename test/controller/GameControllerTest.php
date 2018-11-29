@@ -24,11 +24,11 @@ class GameControllerTest extends TestCase
         $fake = \Mockery::mock('iGameView');
         $fake   
             ->shouldReceive('displayGame')
-            ->andReturn("Some HTML");
+            ->andReturn("Game View");
 
         $fake
            ->shouldReceive('displayOptions')
-           ->andReturn('option 1, option 2, option 4');
+           ->andReturn('Display Options');
 
         $fake   
             ->shouldReceive('newGameRequest')
