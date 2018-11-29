@@ -63,6 +63,11 @@ class GameControllerTest extends TestCase
             ->andReturnUsing(function(array $cards){
                 return join($cards);
             });
+        $fake   
+            ->shouldReceive('cardClicked')
+            ->andReturnUsing(function(){
+                isset($_POST['clicked_image']);
+            });
 
         $fake->shouldReceive('displayOptions')->andReturn('Display Options');
         $fake->shouldReceive('newGameRequest')->andReturn($newGameRequest);   
