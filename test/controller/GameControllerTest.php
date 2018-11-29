@@ -10,52 +10,52 @@ class GameControllerTest extends TestCase
 {
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     
-    private $cards = array('cow.png', 'cow.png', 'fish.png', 'fish.png');
-    
     public function test_runGame_shouldDisplayGameWhenNewGameRequestFalse(){
         $newGameRequest = false;
-        $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
-
-        $sut = new GameController();
-        
-        $actual = $sut->runGame($view, $pile);
-        $expected = $view->displayGame($this->cards);
-
-        $this->assertEquals($actual, $expected);
+        $this->runGame_display($newGameRequest);
     }
+
     
     public function test_runGame_shouldDisplayOptionsWhenNewGameRequestTrue(){
         $newGameRequest = true;
+        $this->runGame_display($newGameRequest);
+    }
+
+    private function runGame_display($newGameRequest){
+        $cards = array('chicken.png', 'chicken.png', 'fish.png', 'fish.png');
+
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
-        
+        $pile = $this->fakePile($cards);
+
         $sut = new GameController();
         
         $actual = $sut->runGame($view, $pile);
-        $expected = $view->displayOptions();
+        $expected = $newGameRequest ? 
+        $view->displayOptions()
+        : $view->displayGame($this->cards);
 
         $this->assertEquals($actual, $expected);
     }
+    
 
     public function test_runGame_shouldNotDisplayCow(){
+        $cards = array('cow.png', 'cow.png', 'fish.png', 'fish.png');
+
         //prepare condition for removing cow.png
         $_SESSION['last_card'] = 'cow.png';
         $_POST['clicked_image'] = 'cow.png';
         $newGameRequest = false;
 
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
+        $pile = $this->fakePile($cards);
 
-        $sut = new GameController($this->fakePile(), $this->fakeGameView($newGameRequest));
+        $sut = new GameController();
         $actual = $sut->runGame($view, $pile);
         $expected = join(array('fish.png', 'fish.png'));
         $this->assertEquals($actual, $expected);
-
     }
 
     private function fakeGameView($newGameRequest){
-
         $fake = \Mockery::mock('iGameView');
         $fake   
             ->shouldReceive('displayGame')
@@ -64,27 +64,24 @@ class GameControllerTest extends TestCase
                 return join($cards);
             });
 
-        $fake
-           ->shouldReceive('displayOptions')
-           ->andReturn('Display Options');
-
-        $fake   
-            ->shouldReceive('newGameRequest')
-            ->andReturn($newGameRequest);
+        $fake->shouldReceive('displayOptions')->andReturn('Display Options');
+        $fake->shouldReceive('newGameRequest')->andReturn($newGameRequest);   
         
         return $fake;
     }
 
-    private function fakePile(){
+    private function fakePile($cards){
         $fake = \Mockery::mock('Pile');
-        $fake   
-            ->shouldReceive('removeFromPile')
-            ->with('cow.png')
-            ->andReturn($this->cards = array_diff($this->cards, array('cow.png')));
 
         $fake  
             ->shouldReceive('getPile')
-            ->andReturn($this->cards);
+            ->andReturn($cards);
+
+        $fake   
+            ->shouldReceive('removeFromPile')
+            ->with('cow.png')
+            ->andReturn($cards = array_diff($cards, array('cow.png')));
+
 
         return $fake;
     }
