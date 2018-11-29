@@ -7,6 +7,6 @@ require_once("./src/model/FileReader.php");
 class GameController{
 
     function runGame(iGameView $gameView){
-        return $gameView->displayGame();
+        //return $gameView->displayGame();
     }
 }

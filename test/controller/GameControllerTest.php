@@ -10,7 +10,7 @@ class GameControllerTest extends TestCase
 {
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     
-    public function test_runGame_shouldReturnHtmlFromView(){
+    public function test_runGame_shouldDisplayGameWhenNewGameRequestFalse(){
         $mockView = $this->fakeGameView();
         $sut = new GameController();
         
@@ -25,6 +25,14 @@ class GameControllerTest extends TestCase
         $fake   
             ->shouldReceive('displayGame')
             ->andReturn("Some HTML");
+
+        $fake
+           ->shouldReceive('displayOptions')
+           ->andReturn('option 1, option 2, option 4');
+
+        $fake   
+            ->shouldReceive('newGameRequest')
+            ->andReturn(false);
 
         return $fake;
     }
