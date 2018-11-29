@@ -16,34 +16,34 @@ class GameViewTest extends TestCase
     }
     
     public function test_displayGameOptions_shouldReturnHiddenElementsWithOptions(){
-        $regexArray = array('/input type="hidden" name="game_option" value="4"/', '/input type="hidden" name="game_option" value="5"/', '/input type="hidden" name="game_option" value="6"/');
+        $regexArray = array('#<input type="hidden" name="game_option" value="4">#', '#<input type="hidden" name="game_option" value="5">#', '#<input type="hidden" name="game_option" value="6">#');
         $this->displayGameOptions_matchRegex($regexArray);
     } 
 
     public function test_displayGameOptions_shouldReturnButtonElementsWithOptions(){
-        $regexArray = array('/input type="button" name="game_option" value="8 brickor"/', '/input type="button" name="game_option" value="10 brickor"/', '/input type="button" name="game_option" value="12 brickor"/');
+        $regexArray = array('#<input type="button" name="game_option" value="8 brickor">#', '#<input type="button" name="game_option" value="10 brickor">#', '#<input type="button" name="game_option" value="12 brickor">#');
         $this->displayGameOptions_matchRegex($regexArray);
     } 
 
     public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
-        $regexArray = array('/link rel="stylesheet" type="text\/css" href="public\/css\/stylesheet.css"/');
+        $regexArray = array('#<link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">#');
         $this->displayGame_matchRegex($regexArray);
     }
 
     public function test_displayGame_shouldReturnHtmlTemplateWithValidDocumentTags(){
-        $regexArray = array('/!DOCTYPE html/', '/head/', '/\/head/', '/body/', '/\/body/', '/title/', '/\/title/');
+        $regexArray = array('#<!DOCTYPE html>#', '#<head>#', '#</head>#', '#<body>#', '#</body>#', '#<title>#', '#</title>#');
         $this->displayGame_matchRegex($regexArray);
     }
     
     public function test_displayGame_shouldReturnForm(){
-        $regexArray = array('/form method="post"/', '/\/form/');
+        $regexArray = array('#<form method="post">#', '#</form>#');
         $this->displayGame_matchRegex($regexArray);
     }
     
     public function test_displayGame_imageFormShouldContainValidImageInputTag(){
         $regexArray = array();
         foreach($this->cards as $c){
-            array_push($regexArray, '/input type="image" src="public\/images\/' . $c ."/");
+            array_push($regexArray, '#<input type="image" src="public/images/' . $c .'">#');
         }
 
         $this->displayGame_matchRegex($regexArray);
@@ -52,7 +52,7 @@ class GameViewTest extends TestCase
     public function test_displayGame_imageFormShouldContainHiddenInputTag(){
         $regexArray = array();
         foreach($this->cards as $c){
-            array_push($regexArray, '/input type="hidden" name="clicked_image" value="'.$c.'"/');
+            array_push($regexArray, '#<input type="hidden" name="clicked_image" value="'.$c.'">#');
         }
 
         $this->displayGame_matchRegex($regexArray);
