@@ -59,8 +59,10 @@ class GameControllerTest extends TestCase
         $fake = \Mockery::mock('iGameView');
         $fake   
             ->shouldReceive('displayGame')
-            ->with($this->cards)
-            ->andReturn(join($this->cards));
+            ->with(\Mockery::type('array'))
+            ->andReturnUsing(function(array $cards){
+                return join($cards);
+            });
 
         $fake
            ->shouldReceive('displayOptions')
