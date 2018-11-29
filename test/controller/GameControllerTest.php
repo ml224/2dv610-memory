@@ -12,6 +12,7 @@ class GameControllerTest extends TestCase
     
     public function test_runGame_shouldDisplayGameWhenNewGameRequestFalse(){
         $mockView = $this->fakeGameView();
+        $mockView->shouldReceive('newGameRequest')->andReturn(false);
         $sut = new GameController();
         
         $actual = $sut->runGame($mockView);
@@ -42,10 +43,10 @@ class GameControllerTest extends TestCase
            ->shouldReceive('displayOptions')
            ->andReturn('Display Options');
 
-        $fake   
+        /*$fake   
             ->shouldReceive('newGameRequest')
             ->andReturn(false);
-
+        */
         return $fake;
     }
 
