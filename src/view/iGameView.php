@@ -2,6 +2,5 @@
 
 interface iGameView
 {
-    public function __construct(Array $cards);
-    public function displayGame();
+    public function displayGame(Array $cards);
 }

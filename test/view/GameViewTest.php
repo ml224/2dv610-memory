@@ -67,14 +67,14 @@ class GameViewTest extends TestCase
     }
 
     private function getClickedImageName_testPostValue($value){
-        $sut = $this->sut();
+        $sut = new GameView();
         $this->setPost($value);
         $this->assertSame($value, $sut->getClickedImageName());
     }
 
     private function displayGame_matchRegex(Array $regexArray){
-        $sut = $this->sut();
-        $html = $sut->displayGame();
+        $sut = new GameView();
+        $html = $sut->displayGame($this->cards);
         
         foreach($regexArray as $regex){
             $this->assertRegexp($regex, $html);
@@ -82,7 +82,7 @@ class GameViewTest extends TestCase
     }
 
     private function displaygameOptions_matchRegex(Array $regexArray){
-        $sut = $this->sut();
+        $sut = new GameView();
         $html = $sut->displayGameOptions();
         
         foreach($regexArray as $regex){
@@ -92,7 +92,7 @@ class GameViewTest extends TestCase
 
     public function test_cardClicked_shouldReturnTrue(){
         $this->setPost('cow.png');
-        $sut = $this->sut();
+        $sut = new GameView();
         $cardClicked = $sut->cardClicked();
         $this->assertTrue($cardClicked);
     }
@@ -102,7 +102,7 @@ class GameViewTest extends TestCase
             unset($_POST[$this->cardClicked]);
         }
 
-        $sut = $this->sut();
+        $sut = new GameView();
         $cardClicked = $sut->cardClicked();
         $this->assertFalse($cardClicked);
     }

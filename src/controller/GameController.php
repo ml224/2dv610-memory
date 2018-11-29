@@ -10,6 +10,9 @@ class GameController{
         if($gameView->newGameRequest()){
             return $gameView->displayOptions();    
         } else {
+            //check if session is same as clicked card
+            //if so, remove images from pile
+            //send in pile to display game
             return $gameView->displayGame();
         }
     }

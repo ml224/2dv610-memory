@@ -3,12 +3,7 @@ require_once('iGameView.php');
 
 class GameView implements iGameView{
     
-    private $cards;
     private $clickedCard = 'clicked_image';
-
-    function __construct(Array $cards) {
-        $this->cards = $cards;
-    } 
 
     public function displayGameOptions(){
         return '
@@ -23,10 +18,7 @@ class GameView implements iGameView{
         ';
     }
 
-    public function displayGame() : string {
-        if(isset($_POST[$this->clickedCard])){
-            echo $this->getClickedImageName();
-        }
+    public function displayGame(Array $cards) : string {
         return 
         '
         <!DOCTYPE html>
@@ -36,15 +28,15 @@ class GameView implements iGameView{
         </head>
         <body>
         <div class="cards">
-        '. $this->displayCards() .'
+        '. $this->displayCards($cards) .'
         </div>
         </body>
         '; 
     }
     
-    private function displaycards() : string {
+    private function displaycards(Array $cards) : string {
         $html = '';
-        foreach($this->cards as $card){
+        foreach($cards as $card){
             $html .= '
             <form method="post">
             <input type="hidden" name="'.$this->clickedCard.'" value="'.$card.'">
