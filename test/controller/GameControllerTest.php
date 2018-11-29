@@ -14,35 +14,41 @@ class GameControllerTest extends TestCase
     
     public function test_runGame_shouldDisplayGameWhenNewGameRequestFalse(){
         $newGameRequest = false;
-        $mockView = $this->fakeGameView($newGameRequest);
+        $view = $this->fakeGameView($newGameRequest);
+        $pile = $this->fakePile();
 
         $sut = new GameController();
         
-        $actual = $sut->runGame($mockView);
-        $expected = $mockView->displayGame();
+        $actual = $sut->runGame($view, $pile);
+        $expected = $view->displayGame($this->cards);
 
         $this->assertEquals($actual, $expected);
     }
     
     public function test_runGame_shouldDisplayOptionsWhenNewGameRequestTrue(){
         $newGameRequest = true;
-        $mockView = $this->fakeGameView($newGameRequest);
+        $view = $this->fakeGameView($newGameRequest);
+        $pile = $this->fakePile();
         
         $sut = new GameController();
         
-        $actual = $sut->runGame($mockView);
-        $expected = $mockView->displayOptions();
+        $actual = $sut->runGame($view, $pile);
+        $expected = $view->displayOptions();
 
         $this->assertEquals($actual, $expected);
     }
 
     public function test_runGame_shouldNotDisplayCow(){
+        //prepare condition for removing cow.png
         $_SESSION['last_card'] = 'cow.png';
         $_POST['clicked_image'] = 'cow.png';
         $newGameRequest = false;
 
-        $sut = new GameController($this->fakePile(), $this->fakeGameView());
-        $actual = $sut->displayGame($newGameRequest);
+        $view = $this->fakeGameView($newGameRequest);
+        $pile = $this->fakePile();
+
+        $sut = new GameController($this->fakePile(), $this->fakeGameView($newGameRequest));
+        $actual = $sut->runGame($view, $pile);
         $expected = join(array('fish.png', 'fish.png'));
         $this->assertEquals($actual, $expected);
 
