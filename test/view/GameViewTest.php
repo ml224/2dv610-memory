@@ -66,7 +66,7 @@ class GameViewTest extends TestCase
 
     public function test_displayGame_shouldContainNewGameButton(){
         $regexArray = array('#<input type="hidden" name="new_game_request" value="new_game_request">#',
-        '#<input type="button" value="start new game!">#',
+        '#<button type="submit">start new game!</button>#',
         '#<form method="post">#', '#</form>#');
 
         $this->displayGame_matchRegex($regexArray);
