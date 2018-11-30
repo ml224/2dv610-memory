@@ -54,4 +54,8 @@ class GameView{
     public function cardClicked(){
         return isset($_POST[$this->clickedCard]);
     }
+
+    public function newGameRequest(){
+        return true;
+    }
 }
