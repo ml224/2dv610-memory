@@ -64,6 +64,14 @@ class GameViewTest extends TestCase
         $this->displayGame_matchRegex($regexArray);
     }
 
+    public function test_displayGame_shouldContainNewGameButton(){
+        $regexArray = array('#<input type="hidden" name="new_game_request" value="new_game_request">#',
+        '#<input type="button" name="start new game!" value="start new game!">#',
+        '#<form method="post">#', '#</form>#');
+
+        $this->displayGame_matchRegex($regexArray);
+    }
+
     public function test_getClickedImageName_shouldReturnCowPng(){
         $this->getClickedImageName_testPostValue('cow.png');
     }
