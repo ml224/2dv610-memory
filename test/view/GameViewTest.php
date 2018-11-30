@@ -10,6 +10,7 @@ class GameViewTest extends TestCase
     //use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
     private $cards = array("cow.png","chicken.png", "sheep.png", "fish.png");
     private $cardClicked = 'clicked_image';
+    private $newGameRequest = 'new_game_request';
     
     private function sut(){
         return new GameView($this->cards);
@@ -112,7 +113,7 @@ class GameViewTest extends TestCase
     }
 
     public function test_newGameRequest_shouldReturnTrueIfNewGamePost(){
-        $_POST['new_game_request'] = true;
+        $_POST[$this->newGameRequest] = true;
 
         $sut = new GameView();
         $this->assertTrue($sut->newGameRequest());
