@@ -36,7 +36,7 @@ class GameController{
     }
 
     private function cardsSame(){
-        return $_SESSION[$this->lastCard] === $this->gameView->getClickedImageName();
+        return $_SESSION[$this->lastCard] === $this->getClickedCard();
     }
 
     private function getClickedCard(){

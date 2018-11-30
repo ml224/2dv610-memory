@@ -106,7 +106,7 @@ class GameControllerTest extends TestCase
         $fake = \Mockery::mock('iGameView', [
             'displayOptions' => 'Display Options',
             'newGameRequest' => $newGameRequest,
-            'cardClicked' => true
+            'cardClicked' => isset($_POST[$this->post_card])
         ]);
 
         $fake   
@@ -114,12 +114,6 @@ class GameControllerTest extends TestCase
             ->with(\Mockery::type('array'))
             ->andReturnUsing(function(array $cards){
                 return join($cards);
-            });
-            
-        $fake 
-        ->shouldReceive('cardClicked')
-            ->andReturnUsing(function(){
-                isset($_POST[$this->post_card]);
             });
 
         if(isset($_POST[$this->post_card])){
