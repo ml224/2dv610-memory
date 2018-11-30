@@ -27,6 +27,7 @@ class GameControllerTest extends TestCase
     public function test_runGame_shouldRemoveCowFromPile(){
         //prepare condition for removing cow.png
         $_SESSION['last_card'] = 'cow.png';
+        $_POST['card_clicked'] = 'donkey.png';
         $newGameRequest = false;
 
         $view = $this->fakeGameView($newGameRequest);
@@ -58,6 +59,7 @@ class GameControllerTest extends TestCase
 
     public function test_runGame_shouldNotRemoveCardWithoutPostRequest(){
         $_SESSION['last_card'] = 'cow.png';
+        $_POST = array();
         $newGameRequest = false;
         
         $view = $this->fakeGameView($newGameRequest);

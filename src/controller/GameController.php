@@ -16,7 +16,7 @@ class GameController{
             //check if session is same as clicked card
             //if so, remove images from pile
             //send in pile to display game
-            if($this->sessionSet()){
+            if($this->sessionSet() && isset($_POST['card_clicked'])){
                 $pile->removeFromPile('cow.png');
             }
 
