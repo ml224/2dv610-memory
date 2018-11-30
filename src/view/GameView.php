@@ -1,7 +1,6 @@
 <?php
-require_once('iGameView.php');
 
-class GameView implements iGameView{
+class GameView{
     
     private $clickedCard = 'clicked_image';
 

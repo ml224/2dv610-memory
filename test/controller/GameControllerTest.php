@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-require_once("./src/view/iGameView.php");
+require_once("./src/view/GameView.php");
 require_once("./src/model/Pile.php");
 require_once("./src/model/FileReader.php");
 require_once("./src/controller/GameController.php");
@@ -103,7 +103,7 @@ class GameControllerTest extends TestCase
     }
 
     private function fakeGameView($newGameRequest){
-        $fake = \Mockery::mock('iGameView', [
+        $fake = \Mockery::mock('GameView', [
             'displayOptions' => 'Display Options',
             'newGameRequest' => $newGameRequest,
             'cardClicked' => isset($_POST[$this->post_card])

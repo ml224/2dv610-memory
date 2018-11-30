@@ -7,6 +7,6 @@ require_once('src/controller/GameController.php');
 
 $reader = new FileReader(); 
 $pile = new Pile($reader->getImages(4));
-$gameView = new GameView($pile->getPile());
+$gameView = new GameView();
 $controller = new GameController();
-echo $controller->runGame($gameView);
+echo $controller->runGame($gameView, $pile);
