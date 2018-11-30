@@ -31,14 +31,12 @@ class GameView{
         <div class="cards">
         '. $this->displayCards($cards) .'
         </div>
-        <form method="post">
-        <input type="hidden" name="new_game_request" value="new_game_request">
-        <input type="button" name="start new game!" value="start new game!">        
-        </form>
+        '.$this->newGameButton().'
         </body>
         '; 
     }
     
+
     private function displaycards(Array $cards) : string {
         $html = '';
         foreach($cards as $card){
@@ -51,6 +49,15 @@ class GameView{
         }
 
         return $html;
+    }
+
+    private function newGameButton(){
+        return '
+        <form method="post" class="button">
+        <input type="hidden" name="'.$this->newGameRequest.'" value="'.$this->newGameRequest.'">
+        <input type="button" value="start new game!">        
+        </form>
+        ';
     }
 
     public function getClickedImageName(){

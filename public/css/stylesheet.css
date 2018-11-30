@@ -13,3 +13,7 @@ input {
     margin: 3px;
     padding: 5px; 
 }
+
+.button input{
+    width: 100%;
+}
