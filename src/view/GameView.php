@@ -55,7 +55,7 @@ class GameView{
         return '
         <form method="post" class="button">
         <input type="hidden" name="'.$this->newGameRequest.'" value="'.$this->newGameRequest.'">
-        <input type="button" value="start new game!">        
+        <button type="submit">start new game!</button>        
         </form>
         ';
     }
