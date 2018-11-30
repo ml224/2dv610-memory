@@ -9,6 +9,7 @@ require_once("./src/controller/GameController.php");
 class GameControllerTest extends TestCase
 {
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    private $cards = array('cow.png', 'cow.png', 'fish.png', 'fish.png');
     
     public function test_runGame_shouldDisplayOptionsWhenNewGameRequestTrue(){
         $newGameRequest = true;
@@ -23,9 +24,7 @@ class GameControllerTest extends TestCase
         $this->assertEquals($actual, $expected);
     }
 
-    public function test_runGame_shouldNotDisplayCow(){
-        $cards = array('cow.png', 'cow.png', 'fish.png', 'fish.png');
-
+    public function test_runGame_shouldRemoveCowFromPile(){
         //prepare condition for removing cow.png
         $_SESSION['last_card'] = 'cow.png';
         $newGameRequest = false;
@@ -44,16 +43,15 @@ class GameControllerTest extends TestCase
 
     public function test_runGame_shouldDisplayAllCards(){
         session_unset();
-        $cards = array('cow.png', 'cow.png', 'fish.png', 'fish.png');
         $newGameRequest = false;
         
         $view = $this->fakeGameView($newGameRequest);
         $pile = $this->fakePile();
-        $pile->shouldReceive('getPile')->andReturn($cards);
+        $pile->shouldReceive('getPile')->andReturn($this->cards);
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);
-        $expected = join($cards);
+        $expected = join($this->cards);
         
         $this->assertEquals($expected, $actual);
     }

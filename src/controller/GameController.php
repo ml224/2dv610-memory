@@ -7,6 +7,8 @@ require_once("./src/model/FileReader.php");
 
 class GameController{
 
+    private $lastCard = 'last_card';
+
     function runGame(iGameView $gameView, Pile $pile){
         if($gameView->newGameRequest()){
             return $gameView->displayOptions();    
@@ -14,12 +16,16 @@ class GameController{
             //check if session is same as clicked card
             //if so, remove images from pile
             //send in pile to display game
-            if(isset($_SESSION['last_card'])){
+            if($this->sessionSet()){
                 $pile->removeFromPile('cow.png');
             }
 
             $cards = $pile->getPile();
             return $gameView->displayGame($cards);
         }
+    }
+
+    private function sessionSet(){
+        return isset($_SESSION[$this->lastCard]);
     }
 }
