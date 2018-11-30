@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once("./src/view/GameView.php");
 require_once("./src/model/Pile.php");
@@ -13,7 +14,10 @@ class GameController{
             //check if session is same as clicked card
             //if so, remove images from pile
             //send in pile to display game
-            $pile->removeFromPile('cow.png');
+            if(isset($_SESSION['last_card'])){
+                $pile->removeFromPile('cow.png');
+            }
+
             $cards = $pile->getPile();
             return $gameView->displayGame($cards);
         }
