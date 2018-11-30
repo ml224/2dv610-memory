@@ -111,6 +111,13 @@ class GameViewTest extends TestCase
         $_POST[$this->cardClicked] = $value;
     }
 
+    public function test_newGameRequest_shouldReturnTrueIfNewGamePost(){
+        $_POST['new_game_request'] = true;
+
+        $sut = new GameView();
+        $this->assertTrue($sut->newGameRequest());
+    }
+
 }
 
 
