@@ -26,6 +26,11 @@ class GameViewTest extends TestCase
         $this->displayGameOptions_matchRegex($regexArray);
     } 
 
+    public function test_displayGameOptions_shouldReturnFormElements(){
+        $regexArray = array('#<form method="post">#', '#<form/>#');
+        $this->displaygameOptions_matchRegex($regexArray);
+    }
+
     public function test_displayGame_shouldReturnHtmlTemplateWithValidCssTag(){
         $regexArray = array('#<link rel="stylesheet" type="text/css" href="public/css/stylesheet.css">#');
         $this->displayGame_matchRegex($regexArray);
