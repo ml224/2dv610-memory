@@ -9,7 +9,10 @@ require_once("./src/controller/GameController.php");
 class GameControllerTest extends TestCase
 {
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    
     private $cards = array('cow.png', 'cow.png', 'fish.png', 'fish.png');
+    private $session_card = 'last_card';
+    private $post_card = 'card_clicked';
     
     public function test_runGame_shouldDisplayOptionsWhenNewGameRequestTrue(){
         $newGameRequest = true;
@@ -26,8 +29,8 @@ class GameControllerTest extends TestCase
 
     public function test_runGame_shouldRemoveCowFromPile(){
         //prepare condition for removing cow.png
-        $_SESSION['last_card'] = 'cow.png';
-        $_POST['card_clicked'] = 'donkey.png';
+        $_SESSION[$this->session_card] = 'cow.png';
+        $_POST[$this->post_card] = 'donkey.png';
         $newGameRequest = false;
 
         $view = $this->fakeGameView($newGameRequest);
