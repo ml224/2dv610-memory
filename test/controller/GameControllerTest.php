@@ -30,7 +30,7 @@ class GameControllerTest extends TestCase
     public function test_runGame_shouldRemoveCowFromPile(){
         //prepare condition for removing cow.png
         $_SESSION[$this->session_card] = 'cow.png';
-        $_POST[$this->post_card] = 'donkey.png';
+        $_POST[$this->post_card] = 'cow.png';
         $newGameRequest = false;
 
         $view = $this->fakeGameView($newGameRequest);
@@ -41,6 +41,23 @@ class GameControllerTest extends TestCase
 
         $actual = $sut->runGame($view, $pile);
         $expected = 'fish.pngfish.png';
+        
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function test_runGame_shouldNotRemoveCardFromPileWithIncorrectPostVariable(){
+        //prepare condition for removing cow.png
+        $_SESSION[$this->session_card] = 'cow.png';
+        $_POST[$this->post_card] = 'donkey.png';
+        $newGameRequest = false;
+
+        $view = $this->fakeGameView($newGameRequest);
+        $pile = $this->fakePile();
+        $pile->shouldReceive('getPile')->andReturn($this->cards);
+        $sut = new GameController();
+
+        $actual = $sut->runGame($view, $pile);
+        $expected = join($this->cards);
         
         $this->assertEquals($expected, $actual);
     }
@@ -61,7 +78,7 @@ class GameControllerTest extends TestCase
     }
 
     public function test_runGame_shouldNotRemoveCardWithoutPostRequest(){
-        $_SESSION['last_card'] = 'cow.png';
+        $_SESSION[$this->session_card] = 'cow.png';
         $_POST = array();
         $newGameRequest = false;
         
