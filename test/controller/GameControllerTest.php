@@ -102,6 +102,18 @@ class GameControllerTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function test_runGame_shouldSetClickedCardAsSession(){
+        $_POST[$this->post_card] = 'cow.png';
+        session_unset();
+
+        $view = $this->fakeGameView(false);
+        $pile = $this->fakePile();
+        $sut = new GameController();
+
+        $sut->runGame($view, $pile);
+        $this->assertTrue($_SESSION[$this->session_card] === 'cow.png');
+    }
+
     private function fakeGameView($newGameRequest){
         $fake = \Mockery::mock('GameView', [
             'displayGameOptions' => 'Display Options',
