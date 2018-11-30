@@ -20,6 +20,8 @@ class GameController{
         } else {
             if($this->sessionAndPostSet() && $this->cardsSame()){
                 $pile->removeFromPile($_SESSION[$this->lastCard]);
+            } else if($this->gameView->cardClicked()){
+                $_SESSION[$this->lastCard] = $this->getClickedCard();
             }
 
             $cards = $pile->getPile();
