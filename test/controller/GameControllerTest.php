@@ -52,8 +52,8 @@ class GameControllerTest extends TestCase
         $newGameRequest = false;
 
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
-        $pile->shouldReceive('getPile')->andReturn($this->cards);
+        $pile = $this->fakePileWithReturnValue();
+        
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);
@@ -67,8 +67,7 @@ class GameControllerTest extends TestCase
         $newGameRequest = false;
         
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
-        $pile->shouldReceive('getPile')->andReturn($this->cards);
+        $pile = $this->fakePileWithReturnValue();
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);
@@ -83,8 +82,7 @@ class GameControllerTest extends TestCase
         $newGameRequest = false;
         
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
-        $pile->shouldReceive('getPile')->andReturn($this->cards);
+        $pile = $this->fakePileWithReturnValue();
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);
@@ -117,6 +115,12 @@ class GameControllerTest extends TestCase
 
     private function fakePile(){
         $fake = \Mockery::mock('Pile');
+        return $fake;
+    }
+
+    private function fakePileWithReturnValue(){
+        $fake = $this->fakePile();
+        $fake->shouldReceive('getPile')->andReturn($this->cards);
         return $fake;
     }
 
