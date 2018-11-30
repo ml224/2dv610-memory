@@ -32,11 +32,11 @@ class GameController{
     }
 
     private function sessionAndPostSet(){
-        return isset($_SESSION[$this->lastCard]) && isset($_POST[$this->clickedCard]);
+        return isset($_SESSION[$this->lastCard]) && $this->gameView->cardClicked();
     }
 
     private function cardsSame(){
-        return $_SESSION[$this->lastCard] === $_POST[$this->clickedCard];
+        return $_SESSION[$this->lastCard] === $this->gameView->getClickedImageName();
     }
 
     private function getClickedCard(){
