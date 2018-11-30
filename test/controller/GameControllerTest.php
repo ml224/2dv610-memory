@@ -56,6 +56,21 @@ class GameControllerTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function test_runGame_shouldNotRemoveCardWithoutPostRequest(){
+        $_SESSION['last_card'] = 'cow.png';
+        $newGameRequest = false;
+        
+        $view = $this->fakeGameView($newGameRequest);
+        $pile = $this->fakePile();
+        $pile->shouldReceive('getPile')->andReturn($this->cards);
+        $sut = new GameController();
+
+        $actual = $sut->runGame($view, $pile);
+        $expected = join($this->cards);
+        
+        $this->assertEquals($expected, $actual);
+    }
+
     private function fakeGameView($newGameRequest){
         $fake = \Mockery::mock('iGameView', [
             'getClickedImageName' => 'cow.png',
