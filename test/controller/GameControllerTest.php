@@ -43,23 +43,24 @@ class GameControllerTest extends TestCase
     }
 
     private function fakeGameView($newGameRequest){
-        $fake = \Mockery::mock('iGameView');
+        $fake = \Mockery::mock('iGameView', [
+            'getClickedImageName' => 'cow.png',
+            'displayOptions' => 'Display Options',
+            'newGameRequest' => $newGameRequest,
+            'cardClicked' => true
+        ]);
+
         $fake   
             ->shouldReceive('displayGame')
             ->with(\Mockery::type('array'))
             ->andReturnUsing(function(array $cards){
                 return join($cards);
             });
-        $fake->shouldReceive('cardClicked')->andReturn('true');   
             /*->shouldReceive('cardClicked')
             ->andReturnUsing(function(){
                 isset($_POST['clicked_image']);
             });*/
 
-        $fake->shouldReceive('getClickedImageName')->andReturn('cow.png');
-        $fake->shouldReceive('displayOptions')->andReturn('Display Options');
-        $fake->shouldReceive('newGameRequest')->andReturn($newGameRequest);   
-        
         return $fake;
     }
 
