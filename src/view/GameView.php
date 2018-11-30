@@ -3,6 +3,7 @@
 class GameView{
     
     private $clickedCard = 'clicked_image';
+    private $newGameRequest = 'new_game_request';
 
     public function displayGameOptions(){
         return '
@@ -56,6 +57,6 @@ class GameView{
     }
 
     public function newGameRequest(){
-        return isset($_POST['new_game_request']);
+        return isset($_POST[$this->newGameRequest]);
     }
 }
