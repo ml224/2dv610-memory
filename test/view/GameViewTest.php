@@ -17,7 +17,7 @@ class GameViewTest extends TestCase
     }
     
     public function test_displayGameOptions_shouldReturnHiddenElementsWithOptions(){
-        $regexArray = array('#<input type="hidden" name="game_option" value="4">#', '#<input type="hidden" name="game_option" value="5">#', '#<input type="hidden" name="game_option" value="6">#');
+        $regexArray = array('#<input type="hidden" name="game_option" value="8">#', '#<input type="hidden" name="game_option" value="10">#', '#<input type="hidden" name="game_option" value="12">#');
         $this->displayGameOptions_matchRegex($regexArray);
     } 
 
