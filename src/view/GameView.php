@@ -31,6 +31,10 @@ class GameView{
         <div class="cards">
         '. $this->displayCards($cards) .'
         </div>
+        <form method="post">
+        <input type="hidden" name="new_game_request" value="new_game_request">
+        <input type="button" name="start new game!" value="start new game!">        
+        </form>
         </body>
         '; 
     }
