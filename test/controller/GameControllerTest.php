@@ -53,7 +53,7 @@ class GameControllerTest extends TestCase
         $view = $this->fakeGameView($newGameRequest);
         $pile = $this->fakePile();
         $pile->shouldReceive('removeFromPile')->once();
-        $pile->shouldReceive('getPile')->andReturn(array('fish.png', 'fish.png'));
+        $pile->shouldReceive('getPile')->andReturn(array('cow.png', 'cow.png'));
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);

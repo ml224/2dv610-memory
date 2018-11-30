@@ -18,7 +18,7 @@ class GameController{
             //if so, remove images from pile
             //send in pile to display game
             if($this->sessionAndPostSet() && $this->cardsSame()){
-                $pile->removeFromPile('cow.png');
+                $pile->removeFromPile($_POST[$this->clickedCard]);
             }
 
             $cards = $pile->getPile();
