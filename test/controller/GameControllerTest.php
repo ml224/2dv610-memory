@@ -28,48 +28,42 @@ class GameControllerTest extends TestCase
     }
 
     public function test_runGame_shouldRemoveCowFromPile(){
-        //prepare condition for removing cow.png
-        $_SESSION[$this->session_card] = 'cow.png';
-        $_POST[$this->post_card] = 'cow.png';
-        $newGameRequest = false;
-
-        $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
-        $pile->shouldReceive('removeFromPile')->once();
-        $pile->shouldReceive('getPile')->andReturn(array('fish.png', 'fish.png'));
-        $sut = new GameController();
-
-        $actual = $sut->runGame($view, $pile);
-        $expected = 'fish.pngfish.png';
-        
-        $this->assertEquals($expected, $actual);
+       $this->displayGame_removeFromPile('cow.png');
     }
     
     public function test_runGame_shouldRemoveFishFromPile(){
-        $_SESSION[$this->session_card] = 'fish.png';
-        $_POST[$this->post_card] = 'fish.png';
+       $this->displayGame_removeFromPile('fish.png');
+    }
+
+    private function displayGame_removeFromPile($toBeRemoved){
+        $returnValue = array_diff($this->cards, array($toBeRemoved));
+        
+        //prepping state
+        $_SESSION[$this->session_card] = $toBeRemoved;
+        $_POST[$this->post_card] = $toBeRemoved;
         $newGameRequest = false;
+        
 
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePile();
+        $pile = \Mockery::mock('Pile');
         $pile->shouldReceive('removeFromPile')->once();
-        $pile->shouldReceive('getPile')->andReturn(array('cow.png', 'cow.png'));
+        $pile->shouldReceive('getPile')->andReturn($returnValue);
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);
-        $expected = 'cow.pngcow.png';
+        $expected = join($pile->getPile());
         
         $this->assertEquals($expected, $actual);
     }
 
-    public function test_runGame_shouldNotRemoveCardFromPileWithIncorrectPostVariable(){
+    public function test_runGame_shouldNotRemoveFromPileWithIncorrectPostVariable(){
         //prepare condition for removing cow.png
         $_SESSION[$this->session_card] = 'cow.png';
         $_POST[$this->post_card] = 'donkey.png';
         $newGameRequest = false;
 
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePileWithReturnValue();
+        $pile = $this->fakePile();
         
         $sut = new GameController();
 
@@ -79,12 +73,12 @@ class GameControllerTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function test_runGame_shouldDisplayAllCards(){
+    public function test_runGame_shouldDisplayAllCardsWhenNoSessionSet(){
         session_unset();
         $newGameRequest = false;
         
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePileWithReturnValue();
+        $pile = $this->fakePile();
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);
@@ -99,7 +93,7 @@ class GameControllerTest extends TestCase
         $newGameRequest = false;
         
         $view = $this->fakeGameView($newGameRequest);
-        $pile = $this->fakePileWithReturnValue();
+        $pile = $this->fakePile();
         $sut = new GameController();
 
         $actual = $sut->runGame($view, $pile);
@@ -131,12 +125,7 @@ class GameControllerTest extends TestCase
     }
 
     private function fakePile(){
-        $fake = \Mockery::mock('Pile');
-        return $fake;
-    }
-
-    private function fakePileWithReturnValue(){
-        $fake = $this->fakePile();
+        $fake = \Mockery::mock('Pile');        
         $fake->shouldReceive('getPile')->andReturn($this->cards);
         return $fake;
     }

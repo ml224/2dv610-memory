@@ -9,8 +9,13 @@ class GameController{
 
     private $lastCard = 'last_card';
     private $clickedCard = 'card_clicked'; 
+    private $gameView;
+    private $pile;
 
     function runGame(iGameView $gameView, Pile $pile){
+        $this->gameView = $gameView;
+        $this->pile = $pile;
+
         if($gameView->newGameRequest()){
             return $gameView->displayOptions();    
         } else {
@@ -32,5 +37,9 @@ class GameController{
 
     private function cardsSame(){
         return $_SESSION[$this->lastCard] === $_POST[$this->clickedCard];
+    }
+
+    private function getClickedCard(){
+        return $this->gameView->getClickedImageName();
     }
 }
