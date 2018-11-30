@@ -16,7 +16,7 @@ class GameController{
         $this->pile = $pile;
 
         if($gameView->newGameRequest()){
-            return $gameView->displayOptions();    
+            return $gameView->displayGameOptions();    
         } else {
             if($this->sessionAndPostSet() && $this->cardsSame()){
                 $pile->removeFromPile($_SESSION[$this->lastCard]);

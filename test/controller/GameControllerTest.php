@@ -22,7 +22,7 @@ class GameControllerTest extends TestCase
         $sut = new GameController();
         
         $actual = $sut->runGame($view, $pile);
-        $expected =  $view->displayOptions();
+        $expected =  $view->displayGameOptions();
 
         $this->assertEquals($actual, $expected);
     }
@@ -104,7 +104,7 @@ class GameControllerTest extends TestCase
 
     private function fakeGameView($newGameRequest){
         $fake = \Mockery::mock('GameView', [
-            'displayOptions' => 'Display Options',
+            'displayGameOptions' => 'Display Options',
             'newGameRequest' => $newGameRequest,
             'cardClicked' => isset($_POST[$this->post_card])
         ]);
