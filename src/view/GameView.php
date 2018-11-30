@@ -56,6 +56,6 @@ class GameView{
     }
 
     public function newGameRequest(){
-        return true;
+        return isset($_POST['new_game_request']);
     }
 }
