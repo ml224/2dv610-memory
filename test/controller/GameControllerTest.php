@@ -108,8 +108,8 @@ class GameControllerTest extends TestCase
 
         $view = $this->fakeGameView(false);
         $pile = $this->fakePile();
+       
         $sut = new GameController();
-
         $sut->runGame($view, $pile);
         $this->assertTrue($_SESSION[$this->session_card] === 'cow.png');
     }
