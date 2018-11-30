@@ -119,6 +119,12 @@ class GameViewTest extends TestCase
         $this->assertTrue($sut->newGameRequest());
     }
 
+    public function test_newGameRequest_shouldReturnFalseNoPost(){
+        $_POST = array();
+        $sut = new GameView();
+        $this->assertFalse($sut->newGameRequest());
+    }
+
 }
 
 
