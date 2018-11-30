@@ -7,14 +7,20 @@ class GameView{
 
     public function displayGameOptions(){
         return '
+        <form method="post">
         <input type="hidden" name="game_option" value="4">
         <input type="button" name="game_option" value="8 brickor">
+        </form>
 
+        <form>
         <input type="hidden" name="game_option" value="5"> 
         <input type="button" name="game_option" value="10 brickor"> 
+        </form>
 
+        <form>
         <input type="hidden" name="game_option" value="6">
         <input type="button" name="game_option" value="12 brickor">
+        </form>
         ';
     }
 

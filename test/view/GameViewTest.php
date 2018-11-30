@@ -27,7 +27,7 @@ class GameViewTest extends TestCase
     } 
 
     public function test_displayGameOptions_shouldReturnFormElements(){
-        $regexArray = array('#<form method="post">#', '#<form/>#');
+        $regexArray = array('#<form method="post">#', '#</form>#');
         $this->displaygameOptions_matchRegex($regexArray);
     }
 
